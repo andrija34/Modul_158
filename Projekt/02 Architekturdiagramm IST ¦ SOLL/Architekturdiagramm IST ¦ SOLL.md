@@ -33,7 +33,6 @@ Das bestehende System läuft als einzelne VM on-premise. Alle Dienste (Webserver
 | Monitoring | Keines |
 | SSL | Kein SSL-Zertifikat |
 
-📸 `images/ist-diagramm.png`
 
 ---
 
@@ -58,7 +57,6 @@ apache2ctl -S
 
 ```
 
-📸 `images/ist-apache-config.png`
 
 ---
 
@@ -75,7 +73,6 @@ php -i | grep upload_max
 # upload_max_filesize => 2M
 ```
 
-📸 `images/ist-php-config.png`
 
 ---
 
@@ -89,7 +86,6 @@ mysql -u root -p -e "SHOW DATABASES;"
 # vtiger, information_schema, mysql, performance_schema
 ```
 
-📸 `images/ist-mysql-config.png`
 
 ---
 
@@ -122,7 +118,6 @@ SELECT COUNT(*) FROM vtiger_users WHERE deleted = 0;
 -- Ergebnis: 28
 ```
 
-📸 `images/ist-mengengeruest.png`
 
 ---
 
@@ -164,7 +159,6 @@ Das neue System wird auf einer modernen Ubuntu 24.04 VM aufgebaut. Alle Komponen
 | Monitoring | Prometheus + Grafana |
 | SSL | Let's Encrypt |
 
-📸 `images/soll-diagramm.png`
 
 ---
 
@@ -206,7 +200,6 @@ Das neue System wird auf einer modernen Ubuntu 24.04 VM aufgebaut. Alle Komponen
 
 Der Entscheid wurde gemeinsam mit dem Auftraggeber getroffen und dokumentiert. Die Kriterien Aufwand, Risiko, Kosten und Benutzerfreundlichkeit haben klar für Variante A gesprochen.
 
-📸 `images/varianten-entscheid.png`
 
 ---
 
@@ -219,8 +212,6 @@ Der Entscheid wurde gemeinsam mit dem Auftraggeber getroffen und dokumentiert. D
 | T03 | Anzahl Benutzer | `SELECT COUNT(*) FROM vtiger_users WHERE deleted=0;` | 28 |
 | T04 | DB-Grösse | `SELECT ... SUM(data_length+index_length)...` | ~1.8 GB |
 | T05 | Anzahl Tabellen | `SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='vtiger';` | 247 |
-
-📸 `images/mengengeruest-nachweis.png`
 
 ---
 
