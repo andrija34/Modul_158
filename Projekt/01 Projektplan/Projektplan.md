@@ -1,317 +1,77 @@
-🚀 Auftrag 1 -- Projektplanung (Grobe Umsetzung) CRM-Migration
-=============================================================
+# Auftrag #1 – Projektplan
 
-Projekt
--------
+## Kompetenz
+C: Umstellung und Schritte planen
 
-CRM-Migration `crmserver.sample.ch`
+---
 
-Autor
------
+## Beschreibung
 
-Andrija Milosevic
+In diesem Auftrag wurde ein vollständiger Projektplan für die CRM-Migration von `crmserver.sample.ch` erstellt. Das Ziel ist die Migration auf ein neues OS mit neuem Web/DB-Server bei minimalem Ausfall.
 
-* * * * *
+---
 
-1\. Vorgehensstrategie
-======================
+## Projektplan
 
-Die Migration wird als **Parallelmigration mit kontrolliertem Cutover** umgesetzt.
+### Milestones
 
-Das bedeutet:
+| Milestone | Beschreibung | Datum |
+|-----------|-------------|-------|
+| M1 | Projektstart & IST-Analyse abgeschlossen | 03.03.2025 |
+| M2 | Testumgebung aufgebaut | 10.03.2025 |
+| M3 | Zielsystem konfiguriert | 17.03.2025 |
+| M4 | Migration durchgeführt | 24.03.2025 |
+| M5 | Tests abgeschlossen & Abnahme | 31.03.2025 |
 
--   Das neue System wird vollständig vorbereitet
+### Aufgaben & Aufwände
 
--   Die Migration wird zuerst in einer Testumgebung durchgeführt
+| Aufgabe | Verantwortlich | Aufwand (h) |
+|---------|---------------|-------------|
+| IST-Analyse | Andrija | 4h |
+| Architekturdiagramm | Andrija | 3h |
+| Testumgebung aufbauen | Andrija | 5h |
+| DNS konfigurieren | Andrija | 2h |
+| Webserver installieren | Andrija | 3h |
+| PHP installieren | Andrija | 2h |
+| MySQL installieren | Andrija | 3h |
+| PhpMyAdmin einrichten | Andrija | 2h |
+| SFTP einrichten | Andrija | 2h |
+| Migration durchführen | Andrija | 6h |
+| Backup einrichten | Andrija | 3h |
+| Testing | Andrija | 4h |
+| Monitoring einrichten | Andrija | 3h |
+| Deployment | Andrija | 3h |
 
--   Erst wenn alles funktioniert, erfolgt die Umschaltung
+### Critical Path
+IST-Analyse → Architekturdiagramm → Testumgebung → Zielsystem → Migration → Tests → Deployment
 
-👉 Vorteil:
 
--   minimale Downtime
+---
 
--   geringes Risiko
+## Kommunikationsplan
 
--   saubere Tests möglich
+| Stakeholder | Kanal | Frequenz | Inhalt |
+|-------------|-------|----------|--------|
+| Kunde | E-Mail | Wöchentlich | Statusbericht |
+| Kunde | Meeting | Bei Milestone | Abnahme & Freigabe |
+| Benutzer | E-Mail | 3 Tage vor Migration | Wartungsankündigung |
+| Benutzer | E-Mail | Nach Migration | Bestätigung & neue Infos |
 
-* * * * *
+---
 
-2\. Gesamtvorgehen (Übersicht)
-==============================
+## Migrationsfenster
 
-Das Projekt wird in fünf klar definierte Phasen unterteilt:
+Das System wird Mo–Sa aktiv genutzt. Der Ausfall soll minimal sein.
 
-1.  Planung
+| Datum | Zeitfenster | Beschreibung |
+|-------|-------------|-------------|
+| Sa, 22.03.2025 | 22:00 – 02:00 | Hauptmigration (4h Fenster) |
+| So, 23.03.2025 | 08:00 – 10:00 | Reserve / Rollback falls nötig |
 
-2.  Analyse & Umgebung
+**Rollback-Plan:** Falls die Migration fehlschlägt, wird innerhalb von 30 Minuten auf den alten Server zurückgewechselt. DNS TTL wurde 48h vorher auf 60 Sekunden gesetzt.
 
-3.  Zielsystem Aufbau
+---
 
-4.  Migration
+## Fazit
 
-5.  Testing & Deployment
-
-* * * * *
-
-3\. Phase 1 -- Planung
-=====================
-
-Ziel
-----
-
-Klare Struktur und Vorbereitung des Projekts
-
-Umsetzung
----------
-
--   Projektauftrag analysieren
-
--   Anforderungen definieren (funktional & technisch)
-
--   Zielarchitektur festlegen
-
--   Migrationsstrategie wählen (Variante A)
-
--   Risiken identifizieren
-
--   Teststrategie planen
-
-Ergebnis
---------
-
--   Projektplan
-
--   Struktur für Git/Dokumentation
-
--   klare Vorgehensweise
-
-* * * * *
-
-4\. Phase 2 -- Analyse & Umgebung
-================================
-
-Ziel
-----
-
-Bestehendes System verstehen und reproduzierbar machen
-
-Umsetzung
----------
-
--   bestehende VM starten
-
--   System analysieren (OS, Webserver, DB, PHP)
-
--   verwendete Dienste und Abhängigkeiten erfassen
-
--   Speicherorte der CRM-Daten identifizieren
-
--   System dokumentieren (IST-Zustand)
-
-Parallel:
-
--   neue VM für Zielsystem vorbereiten
-
--   Netzwerk und Zugriff definieren
-
-Ergebnis
---------
-
--   vollständige IST-Dokumentation
-
--   funktionierende Testumgebung
-
-* * * * *
-
-5\. Phase 3 -- Zielsystem Aufbau
-===============================
-
-Ziel
-----
-
-Neue, saubere und sichere Zielumgebung bereitstellen
-
-Umsetzung
----------
-
--   neues Betriebssystem installieren
-
--   Webserver konfigurieren
-
--   PHP-Umgebung einrichten
-
--   Datenbankserver installieren
-
--   Zugriffsmöglichkeiten (SFTP/FTPS) einrichten
-
--   Administrations-Tools bereitstellen
-
--   grundlegende Sicherheitsmassnahmen umsetzen
-
-Ergebnis
---------
-
--   vollständig funktionsfähiges Zielsystem
-
--   sichere und wartbare Infrastruktur
-
-* * * * *
-
-6\. Phase 4 -- Migration
-=======================
-
-Ziel
-----
-
-Übertragung des bestehenden CRM-Systems auf das neue System
-
-Umsetzung
----------
-
--   vollständiges Backup des Altsystems erstellen
-
--   CRM-Dateien übertragen
-
--   Datenbank exportieren und importieren
-
--   Konfigurationsdateien anpassen
-
--   Systemverbindungen prüfen
-
--   Migration zuerst in Testumgebung durchführen
-
-Besonderheit
-------------
-
-Die Migration wird **mehrfach getestet**, bevor sie produktiv durchgeführt wird.
-
-Ergebnis
---------
-
--   CRM läuft auf neuem System
-
--   Daten vollständig vorhanden
-
-* * * * *
-
-7\. Phase 5 -- Testing & Deployment
-==================================
-
-Ziel
-----
-
-Sicherstellen, dass das System stabil und korrekt funktioniert
-
-Umsetzung
----------
-
-### Testing
-
--   Login und Benutzerzugriff testen
-
--   Daten prüfen
-
--   zentrale Funktionen testen
-
--   Fehler analysieren und beheben
-
-### Deployment
-
--   finales Backup erstellen
-
--   letzte Daten synchronisieren
-
--   Umschaltung (Cutover) durchführen
-
--   System nach Go-Live prüfen
-
-### Monitoring
-
--   Systemüberwachung aktivieren
-
--   Logs kontrollieren
-
-Ergebnis
---------
-
--   stabiles produktives System
-
--   Migration erfolgreich abgeschlossen
-
-* * * * *
-
-8\. Zeitplanung
-===============
-
-| Tag | Phase |
-| --- | --- |
-| Tag 1 | Planung + Analyse |
-| Tag 2 | Umgebung + IST |
-| Tag 3 | Zielsystem |
-| Tag 4 | Migration |
-| Tag 5 | Testing + Deployment |
-
-* * * * *
-
-9\. Risikoüberblick
-===================
-
-| Risiko | Massnahme |
-| --- | --- |
-| Datenverlust | vollständiges Backup |
-| Fehler bei Migration | Tests in Umgebung |
-| Inkompatibilität | Voranalyse |
-| Downtime | Parallelmigration |
-
-* * * * *
-
-10\. Sicherheitsüberlegungen
-============================
-
-Während der Migration wird die Sicherheit verbessert durch:
-
--   aktuelles Betriebssystem
-
--   reduzierte Angriffsfläche
-
--   kontrollierte Benutzerzugriffe
-
--   saubere Rechtevergabe
-
--   strukturierte Systemarchitektur
-
-* * * * *
-
-11\. Qualitätsmerkmale (Note 6)
-===============================
-
-Diese Planung erfüllt die Anforderungen für eine hohe Bewertung:
-
--   klare Phasenstruktur
-
--   logisches Vorgehen
-
--   Risikoabsicherung
-
--   Teststrategie vorhanden
-
--   Deployment geplant
-
--   professioneller Aufbau
-
-* * * * *
-
-12\. Fazit
-==========
-
-Die Migration wird strukturiert, sicher und kontrolliert durchgeführt.
-
-Durch die gewählte Strategie wird:
-
--   das Risiko minimiert
-
--   die Downtime reduziert
-
--   eine stabile Zielumgebung erreicht
-
-➡️ Das Projekt entspricht dem **erweiterten Niveau (Note 6)**.
+Der Projektplan wurde vollständig erstellt, mit allen Milestones, Aufgaben und Aufwänden. Das Migrationsfenster wurde bewusst auf Samstagabend gelegt, um den Betrieb minimal zu stören. Die Planung wurde laufend kontrolliert und bei Bedarf angepasst.
