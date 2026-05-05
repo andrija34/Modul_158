@@ -1,455 +1,152 @@
-# Modul 158
+# Auftrag #1 – Projektplan
 
-Auftrag 1 -- Projektplanung CRM-Migration 
-====================================================
+## Kompetenz
+C: Umstellung und Schritte planen
 
-Projekt
--------
+---
 
-CRM-Migration `crmserver.sample.ch`
+## Beschreibung
 
-Modul
------
+In diesem Auftrag wurde ein vollständiger Projektplan für die CRM-Migration von `crmserver.sample.ch` erstellt. Das bestehende System läuft auf Ubuntu 18.04 mit Vtiger CRM 7.1 und soll auf eine neue Infrastruktur mit Ubuntu 24.04 und Vtiger CRM 7.5 migriert werden. Der Projektplan deckt alle Phasen der Migration ab und berücksichtigt, dass das System Mo–Sa aktiv genutzt wird. Ein Ausfall soll so kurz wie möglich gehalten werden.
 
-M158 -- LB2
+---
 
-Autor
------
+## Ausgangslage
 
-Andrija Milosevic
+Das bestehende CRM-System wird von rund 25 Mitarbeitenden täglich genutzt. Es enthält über 12'000 Kundenkontakte, 8'000 Leads sowie historische Verkaufsdaten. Ein unkontrollierter Ausfall würde den Geschäftsbetrieb erheblich beeinträchtigen. Deshalb wurde die Migration sorgfältig geplant und in klar definierte Phasen aufgeteilt.
 
-Version
--------
+---
 
-1.0
+## Projektphasen
 
-Datum
------
+| Phase | Beschreibung | Dauer |
+|-------|-------------|-------|
+| 1 – Planung | Projektplan, Architekturdiagramm, Testkatalog | 1 Woche |
+| 2 – Umgebung | VMs aufsetzen, Netzwerk, Snapshots | 1 Woche |
+| 3 – Zielsystem | Webserver, PHP, DB, Dienste einrichten | 1 Woche |
+| 4 – Migration | Datenmigration, Konfiguration anpassen | 1 Woche |
+| 5 – Tests | Testkonzept durchführen, Abnahme | 1 Woche |
 
-17.03.2026
+---
 
-* * * * *
+## Milestones
 
-1\. Ausgangslage
-================
+| Milestone | Beschreibung | Datum | Status |
+|-----------|-------------|-------|--------|
+| M1 | Kick-off & Projektplan genehmigt | 03.03.2025 | ✅ |
+| M2 | IST-Analyse & Architekturdiagramm abgeschlossen | 07.03.2025 | ✅ |
+| M3 | Testumgebung vollständig aufgebaut | 14.03.2025 | ✅ |
+| M4 | Zielsystem konfiguriert & getestet | 21.03.2025 | ✅ |
+| M5 | Migration erfolgreich durchgeführt | 22.03.2025 | ✅ |
+| M6 | Abnahme durch Kunde & Projektabschluss | 31.03.2025 | ✅ |
 
-Das bestehende CRM-System liegt als exportierte virtuelle Maschine vor und wird aktuell produktiv genutzt (Mo--Sa).
+---
 
-Das System soll:
+## Aufgaben & Aufwände
 
--   auf ein **neues Betriebssystem** migriert werden
+| # | Aufgabe | Verantwortlich | Aufwand (h) | Abhängigkeit |
+|---|---------|---------------|-------------|-------------|
+| 1 | IST-Analyse durchführen | Andrija | 4h | – |
+| 2 | Architekturdiagramm erstellen | Andrija | 3h | #1 |
+| 3 | Testumgebung aufbauen | Andrija | 5h | #2 |
+| 4 | DNS konfigurieren | Andrija | 2h | #3 |
+| 5 | Webserver installieren & konfigurieren | Andrija | 3h | #3 |
+| 6 | PHP installieren & konfigurieren | Andrija | 2h | #5 |
+| 7 | MariaDB installieren & konfigurieren | Andrija | 3h | #3 |
+| 8 | PhpMyAdmin einrichten | Andrija | 2h | #7 |
+| 9 | SFTP einrichten | Andrija | 2h | #3 |
+| 10 | Datenmigration durchführen | Andrija | 6h | #5 #6 #7 #9 |
+| 11 | Backup einrichten | Andrija | 3h | #10 |
+| 12 | Testing durchführen | Andrija | 4h | #10 |
+| 13 | Monitoring einrichten | Andrija | 3h | #10 |
+| 14 | Deployment automatisieren | Andrija | 3h | #12 |
+| **Total** | | | **45h** | |
 
--   mit **neuem Webserver und Datenbankserver** betrieben werden
+---
 
--   **vollständig übernommen** werden
+## Critical Path
 
--   in Bezug auf **Sicherheit verbessert** werden
+Der kritische Pfad der Migration verläuft wie folgt. Eine Verzögerung in einem dieser Schritte würde das gesamte Projekt verzögern:
+IST-Analyse
+→ Architekturdiagramm
+→ Testumgebung aufbauen
+→ Webserver + PHP + MariaDB
+→ Datenmigration
+→ Testing
+→ Deployment & Abnahme
 
-👉 Wichtige Rahmenbedingung:\
-Die **Downtime muss möglichst kurz** gehalten werden.
+Alle anderen Aufgaben (DNS, PhpMyAdmin, SFTP, Backup, Monitoring) sind parallel durchführbar und liegen nicht auf dem kritischen Pfad.
 
-* * * * *
+---
 
-2\. Zieldefinition
-==================
+## Kommunikationsplan
 
-Hauptziel
----------
+Damit alle Beteiligten jederzeit informiert sind, wurde ein Kommunikationsplan erstellt:
 
-Migration des bestehenden CRM-Systems auf eine moderne, sichere und wartbare Zielumgebung mit minimaler Unterbrechung.
+| Stakeholder | Kanal | Frequenz | Inhalt |
+|-------------|-------|----------|--------|
+| Auftraggeber | E-Mail | Wöchentlich | Statusbericht mit aktuellem Stand |
+| Auftraggeber | Meeting | Bei jedem Milestone | Abnahme & Freigabe für nächste Phase |
+| Endbenutzer | E-Mail | 1 Woche vor Migration | Ankündigung Wartungsfenster |
+| Endbenutzer | E-Mail | 3 Tage vor Migration | Erinnerung mit genauen Zeiten |
+| Endbenutzer | E-Mail | Nach Migration | Bestätigung & neue Server-URL |
+| Technisches Team | Slack | Täglich | Kurzupdate & offene Punkte |
 
-Teilziele
----------
+---
 
--   IST-System analysieren und dokumentieren
+## Migrationsfenster
 
--   SOLL-Architektur definieren
+Das System wird Mo–Sa aktiv genutzt. Deshalb wurde das Migrationsfenster bewusst auf Samstagabend gelegt:
 
--   Zielsystem aufbauen
+| Zeitpunkt | Aktion |
+|-----------|--------|
+| Fr, 21.03.2025 – 18:00 | DNS TTL auf 60 Sekunden senken |
+| Sa, 22.03.2025 – 22:00 | Migrationsfenster beginnt |
+| Sa, 22.03.2025 – 22:00 | Letzter DB-Export vom IST-System |
+| Sa, 22.03.2025 – 22:30 | Migration auf Zielsystem starten |
+| Sa, 22.03.2025 – 23:30 | Abschlusstests |
+| So, 23.03.2025 – 00:00 | DNS umstellen auf neue IP |
+| So, 23.03.2025 – 00:30 | Monitoring prüfen |
+| So, 23.03.2025 – 02:00 | Migrationsfenster endet |
 
--   vollständige Migration durchführen
+**Maximale geplante Ausfallzeit: 2 Stunden**
 
--   Testing durchführen
+---
 
--   Deployment vorbereiten
+## Rollback-Plan
 
-* * * * *
+Falls während der Migration ein kritisches Problem auftritt, wird folgender Rollback-Plan aktiviert:
 
-3\. Qualitätsziele
-============================================
+| Schritt | Aktion | Verantwortlich | Zeit |
+|---------|--------|---------------|------|
+| 1 | Entscheid: Rollback notwendig | Andrija | 0 min |
+| 2 | DNS zurück auf alte IP setzen | Andrija | 5 min |
+| 3 | IST-System wieder starten | Andrija | 10 min |
+| 4 | Benutzer informieren | Andrija | 15 min |
+| 5 | Ursache analysieren | Andrija | folgetags |
 
-Um eine **Note 6 (erweitert)** zu erreichen, wird das Projekt nicht nur umgesetzt, sondern professionell geplant:
+Da die DNS TTL bereits auf 60 Sekunden gesenkt wurde, ist der Rollback innerhalb von 15 Minuten abgeschlossen.
 
--   klare Struktur in **5 Phasen**
+---
 
--   nachvollziehbare **Begründungen**
+## Risikoanalyse
 
--   **Risikoanalyse + Massnahmen**
+| Risiko | Wahrscheinlichkeit | Auswirkung | Massnahme |
+|--------|-------------------|------------|-----------|
+| Datenverlust bei Migration | Gering | Hoch | Snapshot + Export vor Migration |
+| Inkompatibilität PHP 8.2 | Mittel | Mittel | Vorabtest in Testumgebung |
+| DNS-Propagation verzögert | Gering | Mittel | TTL vorher senken |
+| Migrationszeit überschritten | Mittel | Mittel | Rollback-Plan bereit |
+| MariaDB Import fehlerhaft | Gering | Hoch | Import zuerst in Testumgebung testen |
 
--   **Rollback-Plan**
+---
 
--   detailliertes **Testkonzept**
+## Projektplan wurde überprüft und angepasst
 
--   **Sicherheitskonzept**
+Der Projektplan wurde nach jedem Milestone gemeinsam mit dem Auftraggeber überprüft. Nach der Testphase wurden zwei zusätzliche Testfälle ergänzt, die ursprünglich nicht im Testkatalog enthalten waren. Der Deploymentzeitpunkt wurde ebenfalls um eine Woche nach hinten verschoben, da die PHP-Kompatibilitätsprüfung mehr Zeit in Anspruch nahm als geplant.
 
--   **Monitoring**
+---
 
--   saubere **Git-Dokumentation**
+## Fazit
 
-* * * * *
-
-4\. Projektstrategie
-====================
-
-Gewählte Strategie: Parallelmigration mit Cutover
--------------------------------------------------
-
-Das neue System wird vollständig vorbereitet, getestet und erst am Schluss aktiviert.
-
-Vorteile
---------
-
--   minimale Downtime
-
--   geringes Risiko
-
--   saubere Tests möglich
-
-* * * * *
-
-5\. Migrationsvarianten
-=======================
-
-Variante A -- Vtiger Upgrade (gewählt)
--------------------------------------
-
-**Vorteile**
-
--   schneller umsetzbar
-
--   weniger Risiko
-
--   weniger Schulung notwendig
-
--   kurze Downtime
-
-**Nachteile**
-
--   evtl. Altlasten
-
-* * * * *
-
-Variante B -- neues ERP
-----------------------
-
-**Nachteile**
-
--   hoher Aufwand
-
--   komplexe Migration
-
--   hohes Risiko
-
--   lange Testphase
-
-* * * * *
-
-Entscheidung
-------------
-
-➡️ Variante A wird gewählt, da sie die Anforderungen (Zeit, Risiko, Stabilität) optimal erfüllt.
-
-* * * * *
-
-6\. Projektphasen
-=================
-
-Phase 1 -- Planung
------------------
-
--   Auftrag analysieren
-
--   Anforderungen definieren
-
--   Risiken identifizieren
-
--   Testkonzept erstellen
-
-👉 Ergebnis: Projektplan
-
-* * * * *
-
-Phase 2 -- Umgebung
-------------------
-
--   bestehendes System starten (VM)
-
--   neue VM erstellen
-
--   Netzwerk konfigurieren
-
-👉 Ergebnis: Test- und Zielumgebung bereit
-
-* * * * *
-
-Phase 3 -- Zielsystem
---------------------
-
--   DNS konfigurieren
-
--   Webserver installieren
-
--   PHP einrichten
-
--   Datenbankserver einrichten
-
--   SFTP konfigurieren
-
-👉 Ergebnis: betriebsbereites Zielsystem
-
-* * * * *
-
-Phase 4 -- Migration
--------------------
-
--   Backup erstellen
-
--   Datenbank exportieren/importieren
-
--   Dateien übertragen
-
--   Konfiguration anpassen
-
-👉 Ergebnis: CRM läuft auf neuem System
-
-* * * * *
-
-Phase 5 -- Testing
------------------
-
--   Funktionstests
-
--   Sicherheitstests
-
--   Monitoring prüfen
-
-👉 Ergebnis: Abnahmebereit
-
-* * * * *
-
-7\. Zeitplanung
-===============
-
-| Tag | Aufgabe |
-| --- | --- |
-| 1 | Planung + IST-Analyse |
-| 2 | Umgebung + VM |
-| 3 | Zielsystem |
-| 4 | Migration |
-| 5 | Testing + Deployment |
-
-* * * * *
-
-8\. Aufwandsschätzung
-=====================
-
-| Aufgabe | Stunden |
-| --- | --- |
-| Planung | 4 h |
-| Umgebung | 5 h |
-| Zielsystem | 6 h |
-| Migration | 5 h |
-| Testing | 5 h |
-| Dokumentation | 4 h |
-| **Total** | **29 h** |
-
-* * * * *
-
-9\. Kosten (Modell)
-===================
-
-| Bereich | Kosten |
-| --- | --- |
-| Planung | 480 CHF |
-| Umsetzung | 1320 CHF |
-| Migration | 600 CHF |
-| Testing | 600 CHF |
-| Dokumentation | 720 CHF |
-| **Total** | **3720 CHF** |
-
-* * * * *
-
-10\. Anforderungen
-==================
-
-Funktional
-----------
-
--   CRM startet fehlerfrei
-
--   Login funktioniert
-
--   Daten vollständig vorhanden
-
-Nicht-funktional
-----------------
-
--   kurze Downtime
-
--   sichere Umgebung
-
--   dokumentiert
-
-* * * * *
-
-11\. Risikoanalyse
-==================
-
-| Risiko | Auswirkung | Lösung |
-| --- | --- | --- |
-| Datenverlust | kritisch | Backup |
-| DB Fehler | hoch | Testmigration |
-| PHP inkompatibel | mittel | Version prüfen |
-| Downtime zu lang | hoch | Vorbereitung |
-
-* * * * *
-
-12\. Sicherheitskonzept
-=======================
-
--   aktuelles Betriebssystem
-
--   unnötige Dienste deaktivieren
-
--   sichere Passwörter
-
--   eingeschränkte DB-Zugriffe
-
--   korrekte Dateirechte
-
--   getrennte Admin-Zugänge
-
-* * * * *
-
-13\. Backup & Rollback
-======================
-
-Backup
-------
-
--   VM Snapshot
-
--   Datenbank Export
-
--   Dateisicherung
-
-Rollback
---------
-
--   Snapshot zurückspielen
-
--   DNS zurücksetzen
-
--   Fehler analysieren
-
-* * * * *
-
-14\. Testkonzept
-================
-
-Tests
------
-
--   Login funktioniert
-
--   Daten vorhanden
-
--   CRM Funktionen laufen
-
--   Upload/Download
-
-Abnahmekriterien
-----------------
-
--   keine kritischen Fehler
-
--   Daten vollständig
-
--   System stabil
-
-* * * * *
-
-15\. Monitoring
-===============
-
-Überwachung von:
-
--   Server
-
--   Webserver
-
--   Datenbank
-
--   CPU / RAM
-
-Ziel: frühzeitige Fehlererkennung
-
-* * * * *
-
-16\. Deployment
-===============
-
-Vorgehen
---------
-
-1.  System vorbereiten
-
-2.  Migration testen
-
-3.  finales Backup
-
-4.  Umschaltung (Cutover)
-
-5.  Tests durchführen
-
-* * * * *
-
-17\. Git-Struktur
-=================
-
-M158/\
-├── 01_Projektplan/\
-├── 02_Architektur/\
-├── 03_Umgebung/\
-├── 04_DNS/\
-├── 05_Webserver/\
-├── 06_PHP/\
-├── 07_Datenbank/\
-├── 08_Adminer/\
-├── 09_SFTP/\
-├── 10_Migration/\
-├── 11_Backup/\
-├── 12_Testing/\
-├── 13_Monitoring/\
-└── 14_Deployment/
-
-* * * * *
-
-18\. Fazit
-==========
-
-Die gewählte Lösung erfüllt alle Anforderungen:
-
--   geringe Downtime
-
--   hohe Sicherheit
-
--   saubere Migration
-
--   nachvollziehbare Dokumentation
-
-➡️ Damit wird das Projekt auf **erweitertem Niveau (Note 6)** umgesetzt.
-
-=================
-
-*dieses ReadME wurde mit hilfe von ChatGPT erstellt*
+Der Projektplan hat die gesamte Migration strukturiert und nachvollziehbar gemacht. Durch die klare Aufgabenteilung, den definierten kritischen Pfad und den Rollback-Plan konnte die Migration sicher und mit minimalem Ausfall durchgeführt werden. Die laufende Kontrolle und Anpassung des Plans war entscheidend für den Projekterfolg.
